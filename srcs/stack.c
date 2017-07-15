@@ -6,16 +6,16 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/14 20:55:35 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/14 21:07:45 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/stack.h"
 
-void	push(t_list **stack, void* elem, size_t size)
+void	push(t_list **stack, void *elem, size_t size)
 {
 	t_list *to_add;
-	
+
 	to_add = ft_lstnew(elem, size);
 	ft_lstadd(stack, to_add);
 	free(to_add);
@@ -24,7 +24,7 @@ void	push(t_list **stack, void* elem, size_t size)
 t_list	*pop(t_list **stack)
 {
 	t_list *out;
-	
+
 	out = *stack;
 	*stack = out->next;
 	out->next = NULL;
@@ -39,7 +39,7 @@ void	bubble_up(t_list **stack)
 	temp->next = (*stack)->next->next;
 	*stack = (*stack)->next;
 	(*stack)->next = temp;
-	free (temp);
+	free(temp);
 }
 
 void	swap(t_list **a, t_list **b)
