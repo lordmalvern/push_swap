@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.h                                            :+:      :+:    :+:   */
+/*   rrotate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/14 18:02:13 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/22 17:52:46 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/07/22 17:28:25 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/07/22 17:51:59 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STACK_H
-# define STACK_H
-# include "../libft/ft_printf.h"
+#include "../includes/stack.h"
 
-void	push(t_list **stack, void *elem, size_t size);
-t_list	*pop(t_list **stack);
-void	bubble_up(t_list **stack);
-void	swap(t_list **a, t_list **b);
-void	rotate(t_list **stack);
-void	rrotate(t_list **stack);
+void	rrotate(t_list **stack)
+{
+	t_list *curr;
 
-#endif
+	curr = *stack;
+	while (curr->next->next != NULL)
+		curr = curr->next;
+	push(stack, curr->next->content, curr->next->content_size);
+	free(curr->next);
+	curr->next = NULL;
+}
