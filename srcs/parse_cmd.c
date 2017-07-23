@@ -6,11 +6,11 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:30:17 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/22 18:49:48 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/22 19:37:24 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
 void	parse_cmd(char *cmd, t_list **a, t_list **b)
 {

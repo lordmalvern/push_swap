@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/22 18:47:55 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/22 20:59:19 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/07/22 19:33:47 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/07/22 20:58:57 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 # include "stack.h"
 
+void	parse_cmd(char *cmd, t_list **a, t_list **b);
 #endif
