@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/22 18:05:13 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/23 17:55:13 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_list	*pop(t_list **stack)
 
 void	bubble_up(t_list **stack)
 {
-	t_list *temp;
-	int size;
+	t_list	*temp;
+	int		size;
 
 	temp = *stack;
 	size = 0;

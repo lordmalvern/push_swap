@@ -6,16 +6,21 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 17:11:20 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/04/30 17:22:59 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/23 17:31:29 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isint(char *str)
+int	ft_isint(char *s)
 {
-	while (*str)
-		if (!ft_isdigit(*str++))
+	int l;
+
+	l = ft_strlen(s);
+	if (l >= 7 && (!ft_strequ(s, "-2147483648") || ft_strequ(s, "2147483647")))
+		return (0);
+	while (*s)
+		if (!ft_isdigit(*s++))
 			return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:30:17 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/22 19:37:24 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/23 17:23:18 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ void	parse_cmd(char *cmd, t_list **a, t_list **b)
 		rrotate(a);
 	if (ft_strequ(cmd, "rrb") || ft_strequ(cmd, "rrr"))
 		rrotate(b);
+	else
+		ft_printf("Error\n");
 }
