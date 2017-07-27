@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/24 15:55:28 by bpuschel          #+#    #+#              #
-#    Updated: 2017/07/24 20:38:38 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/07/26 20:15:28 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all: libftprintf-all $(NAMEC)
 clean: libftprintf-clean
 	rm -rf $(STACK_OBJ) $(CHECKER_OBJ)
 
-fclean: clean
+fclean: libftprintf-fclean clean
 	rm -rf $(NAMEC)
 
 re: fclean all
