@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 19:32:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/23 17:57:25 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/26 19:07:53 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ static int	validate(t_list *a, t_list *b)
 	t_list	*curr;
 	int		prev;
 
-	if (a->content == NULL || b->content != NULL)
+	if (a->content == NULL || b != NULL)
 		return (0);
 	curr = a;
 	prev = *((int *)curr->content);
+	curr = curr->next;
 	while (curr != NULL && prev < *((int *)curr->content))
 	{
 		prev = *((int *)curr->content);
@@ -36,6 +37,8 @@ static int	chk_dup(t_list *stack, int n)
 	t_list	*curr;
 
 	curr = stack;
+	if (stack == NULL || stack->content == NULL)
+		return (1);
 	while (curr != NULL && n != *((int *)curr->content))
 		curr = curr->next;
 	if (curr != NULL)
@@ -68,8 +71,8 @@ int			main(int argc, char **argv)
 	int		i;
 	int		n;
 
-	a = ft_lstnew(NULL, 0);
-	b = ft_lstnew(NULL, 0);
+	a = NULL;
+	b = NULL;
 	i = argc;
 	if (argc == 1)
 		return (0);
