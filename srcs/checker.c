@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 19:32:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/26 19:07:53 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/26 22:21:55 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int	chk_dup(t_list *stack, int n)
 	return (1);
 }
 
-static void	parse(t_list **a, t_list **b)
+static void	parse(t_list **a, t_list **b, int debug)
 {
 	char	*cmd;
 
 	while (get_next_line(0, &cmd))
-		parse_cmd(cmd, a, b);
+		parse_cmd(cmd, a, b, debug);
 	if (validate(*a, *b))
 		ft_printf("OK\n");
 	else
@@ -70,20 +70,24 @@ int			main(int argc, char **argv)
 	t_list	*b;
 	int		i;
 	int		n;
+	int		debug;
 
 	a = NULL;
 	b = NULL;
+	debug = 0;
 	i = argc;
 	if (argc == 1)
 		return (0);
-	while (--i > 0)
+	if (ft_strequ(argv[1], "-v"))
+		debug = 1;
+	while (--i > debug)
 	{
 		n = ft_atoi(argv[i]);
 		if ((!ft_isint(argv[i]) || !chk_dup(a, n)) && ft_printf("Error\n"))
 			return (0);
 		push(&a, &n, sizeof(int));
 	}
-	parse(&a, &b);
+	parse(&a, &b, debug);
 	ft_lstdel(&a, del);
 	ft_lstdel(&b, del);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/26 18:57:22 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/07/26 22:10:03 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,17 @@ t_list	*pop(t_list **stack)
 
 void	bubble_up(t_list **stack)
 {
-	t_list	*temp;
-	int		size;
+	void	*c;
+	size_t	s;
 
-	temp = *stack;
-	size = 0;
-	while (temp != NULL || size++)
-		temp = temp->next;
-	if (size > 1)
+	if ((*stack) != NULL && (*stack)->next != NULL)
 	{
-		temp = *stack;
-		temp->next = (*stack)->next->next;
-		*stack = (*stack)->next;
-		(*stack)->next = temp;
+		s = (*stack)->content_size;
+		c = ft_memalloc(s);
+		ft_memcpy(c, (*stack)->next->content, s);
+		ft_memcpy((*stack)->next->content, (*stack)->content, s);
+		ft_memcpy((*stack)->content, c, s);
+		free(c);
 	}
 }
 
