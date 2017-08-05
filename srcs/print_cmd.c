@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/22 19:33:47 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/31 14:04:48 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/07/31 12:34:36 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/07/31 12:38:30 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-# include "stack.h"
+#include "../includes/push_swap.h"
 
-void	parse_cmd(char *cmd, t_list **a, t_list **b, int debug);
-int		validate(t_list *a, t_list *b);
-int		chk_dup(t_list *stack, int n);
-#endif
+void	print_cmd(char *cmd, t_list **a, t_list **b)
+{
+	parse_cmd(cmd, a, b, 0);
+	ft_printf("%s\n", cmd);
+}

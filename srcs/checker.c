@@ -6,13 +6,13 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 19:32:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/26 22:21:55 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/01 19:25:39 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static int	validate(t_list *a, t_list *b)
+int			validate(t_list *a, t_list *b)
 {
 	t_list	*curr;
 	int		prev;
@@ -32,7 +32,7 @@ static int	validate(t_list *a, t_list *b)
 	return (1);
 }
 
-static int	chk_dup(t_list *stack, int n)
+int			chk_dup(t_list *stack, int n)
 {
 	t_list	*curr;
 
