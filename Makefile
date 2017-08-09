@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/24 15:55:28 by bpuschel          #+#    #+#              #
-#    Updated: 2017/07/26 20:15:28 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/08/08 20:36:18 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,29 @@ INCLUDE = includes/
 SRC = srcs/
 STACK_FILES = stack.c rrotate.c
 STACK_OBJ = $(STACK_FILES:.c=.o)
-CHECKER_FILES = parse_cmd.c checker.c
+CHECKER_FILES = parse_cmd.c validate.c checker.c
 CHECKER_OBJ = $(CHECKER_FILES:.c=.o)
+PUSH_FILES = validate.c parse_cmd.c print_cmd.c push_swap.c sort.c
+PUSH_OBJ = $(PUSH_FILES:.c=.o)
 GCC = gcc -Wall -Werror -Wextra -I $(INCLUDE) -Llibft/ -lftprintf -g -o
 .PHONY: all clean fclean re
 
-all: libftprintf-all $(NAMEC)
+all: libftprintf-all $(NAMEC) $(NAMEP)
 
 clean: libftprintf-clean
-	rm -rf $(STACK_OBJ) $(CHECKER_OBJ)
+	rm -rf $(STACK_OBJ) $(CHECKER_OBJ) $(PUSH_OBJ)
 
 fclean: libftprintf-fclean clean
 	rm -rf $(NAMEC)
+	rm -rf $(NAMEP)
 
 re: fclean all
 
 $(NAMEC):
 	$(GCC) $(NAMEC) $(addprefix $(SRC), $(STACK_FILES) $(CHECKER_FILES))
+
+$(NAMEP):
+	$(GCC) $(NAMEP) $(addprefix $(SRC), $(STACK_FILES) $(PUSH_FILES))
 
 libftprintf-all:
 	cd libft && $(MAKE)
