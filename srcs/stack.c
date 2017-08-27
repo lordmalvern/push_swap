@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/07/26 22:10:03 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/26 17:52:53 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	push(t_list **stack, void *elem, size_t size)
 {
-	t_list *to_add;
+	static t_list *to_add;
 
 	if (*stack == NULL)
 		*stack = ft_lstnew(elem, size);
@@ -27,7 +27,7 @@ void	push(t_list **stack, void *elem, size_t size)
 
 t_list	*pop(t_list **stack)
 {
-	t_list *out;
+	static t_list *out;
 	t_list *temp;
 
 	if (*stack == NULL)
@@ -35,6 +35,7 @@ t_list	*pop(t_list **stack)
 	temp = *stack;
 	*stack = temp->next;
 	out = ft_lstnew(temp->content, temp->content_size);
+	free(temp->content);
 	free(temp);
 	return (out);
 }
@@ -77,6 +78,7 @@ void	swap(t_list **a, t_list **b)
 	{
 		temp = pop(a);
 		push(b, temp->content, temp->content_size);
+		free(temp->content);
 		free(temp);
 	}
 }

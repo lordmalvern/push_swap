@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 20:23:32 by bpuschel          #+#    #+#             */
-/*   Updated: 2016/11/16 16:03:29 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/25 14:11:06 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	*ft_memalloc(size_t size)
 {
-	void	*out;
+	static void	*out;
 
 	out = malloc(size);
 	if (out == NULL)

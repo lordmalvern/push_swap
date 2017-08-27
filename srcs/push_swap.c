@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 22:54:12 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/08 21:50:01 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/26 17:16:41 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	del(void *content, size_t size)
 {
-	ft_memdel(&content);
+	if (content)
+		free(content);
 	size = 0;
 }
 
@@ -33,6 +34,7 @@ static void	parse_args(t_list **a, char **argv, int debug, int i)
 			while (args[j] != NULL)
 				j++;
 			parse_args(a, args, -1, j);
+			free(args);
 		}
 		else
 		{
@@ -57,5 +59,5 @@ int			main(int argc, char **argv)
 	sort(&a, &b, argc - 1);
 	ft_lstdel(&a, del);
 	ft_lstdel(&b, del);
-	return (0);
+	exit(0);
 }
