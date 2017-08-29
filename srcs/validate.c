@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 23:47:34 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/08 21:49:13 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/28 17:01:06 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			validate(t_list *a, t_list *b)
 	t_list	*curr;
 	int		prev;
 
-	if (a->content == NULL || b != NULL)
+	if (a == NULL || a->content == NULL || b != NULL)
 		return (0);
 	curr = a;
 	prev = *((int *)curr->content);

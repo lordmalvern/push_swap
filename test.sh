@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/08 22:09:41 by bpuschel          #+#    #+#              #
-#    Updated: 2017/08/08 23:43:10 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/08/27 15:21:01 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #!/bin/sh
@@ -41,9 +41,14 @@ if [ "$RES2" == "OK" ];
 then echo "Result: ${GREEN}${RES2}${NC}\n";
 else echo "Result: ${RED}${RES2}${NC}\n";
 fi;
-echo "Simple 3:\n"
+echo "5 Random Numbers 100 Times:\n"
 i="0"
-while [ $i -lt 10 ]
+MAX="0"
+MIN="100000000000"
+OK="0"
+KO="0"
+OVER="0"
+while [ $i -lt 100 ]
 do
 	ARR1[0]=$RANDOM
 	ARR1[1]=$RANDOM
@@ -51,16 +56,25 @@ do
 	ARR1[3]=$RANDOM
 	ARR1[4]=$RANDOM
 	ARG3=`echo ${ARR1[*]}`
-	echo "List: ${ARG3}\n"
 	NUM3=`./push_swap $ARG3 | wc -l`
-	if [ "$NUM3" -gt "12" ];
-	then echo "Number of instructions: ${RED}${NUM3}${NC}\n";
-	else echo "Number of instructions: ${GREEN}${NUM3}${NC}\n";
-	fi;
 	RES3=`./push_swap $ARG3 | ./checker $ARG3`
+	if [ "$NUM3" -gt "$MAX" ];
+	then MAX="$NUM3"
+	fi;
+	if [ "$NUM3" -lt "$MIN" ]
+	then MIN="$NUM3"
+	fi;
+	if [ "$NUM3" -gt "12" ]
+	then echo "Exceeded max instructions on list: ${ARG3}\nNumber of instructions: ${NUM3}\n"
+		OVER=$[$OVER+1]
+	fi;
+	if [ "$RES3" == "KO" ]
+	then echo "KO on list: ${ARG3}\n"
+	fi;
 	if [ "$RES3" == "OK" ];
-	then echo "Result: ${GREEN}${RES3}${NC}\n";
-	else echo "Result: ${RED}${RES3}${NC}\n";
+	then OK=$[$OK+1]
+	else KO=$[$KO+1]
 	fi;
 	i=$[$i+1]
 done
+echo "Number of lists exceeding max: ${OVER}\nMax instructions done: ${MAX}\nMin instructions: ${MIN}\nTotal OKs: ${OK}\nTotal KOs: ${KO}\n"

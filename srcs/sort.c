@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 13:11:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/25 12:49:32 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/28 21:30:13 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	rev_validate(t_list *a)
 	return (1);
 }
 
-static void rotate_stacks(t_list **a, t_list **b, int i)
+static void	rotate_stacks(t_list **a, t_list **b, int i)
 {
-	while (i > 0)
+	if (i % 2 == 0)
 	{
 		if (!validate(*a, NULL) && !rev_validate(*b))
 			print_cmd("rr", a, b);
@@ -44,23 +44,25 @@ static void rotate_stacks(t_list **a, t_list **b, int i)
 			print_cmd("ra", a, b);
 		else if (!rev_validate(*b))
 			print_cmd("rb", a, b);
-		i--;
+	}
+	else
+	{
+		if (!validate(*a, NULL) && !rev_validate(*b))
+			print_cmd("rrr", a, b);
+		else if (!validate(*a, NULL))
+			print_cmd("rra", a, b);
+		else if (!rev_validate(*b))
+			print_cmd("rrb", a, b);
 	}
 }
 
-static void	swap_sort(t_list **a, t_list **b)
+static void	swap_sort(t_list **a, t_list **b, int size)
 {
-	int r;
-	int start;
-	int size;
-	t_list *curr;
+	int		r;
+	int		start;
 
 	r = 1;
 	start = 0;
-	size = 0;
-	curr = *a;
-	while (curr != NULL && ++size)
-		curr = curr->next;
 	while (!validate(*a, NULL) || !rev_validate(*b))
 	{
 		if (BOTH(*a, *b))
@@ -70,46 +72,48 @@ static void	swap_sort(t_list **a, t_list **b)
 		else if (LT(*b))
 			print_cmd("sb", a, b);
 		rotate_stacks(a, b, r);
-		start += r;
-		if (start >= size - 2 && ++r)
-			start = 0;
+		start++;
+		start = (start >= size) ? 0 : start;
+		r = (start == 0) ? r + 1 : r;
 	}
 }
 
-static void	merge(t_list **a, t_list **b)
+static void	merge(t_list **a, t_list **b, int size)
 {
 	while (*b != NULL)
 	{
 		print_cmd("pa", a, b);
-		if (!validate(*a, NULL))
-		{
-			if (*b != NULL)
-				print_cmd("ra", a, b);
-			if (!validate(*a, NULL))
-				swap_sort(a, b);
-		}
+		if (!validate(*a, NULL) && *b != NULL)
+			print_cmd("ra", a, b);
 	}
+	if (!validate(*a, NULL))
+		sort(a, b, size);
 }
 
 void		sort(t_list **a, t_list **b, int size)
 {
 	int m;
 	int i;
+	int j;
 
-	m = size / 2;
+	m = get_median(a, size);
 	i = 0;
+	j = 1;
 	if (*a == NULL || (*a)->next == NULL)
 		return ;
-	if (GT(*a) && size <= 3 && !validate(*a, *b))
-	{
-		print_cmd("sa", a, b);
-		print_cmd("rra", a, b);
-	}
+	if (size < 4 && !validate(*a, *b))
+		swap_sort(a, b, size);
 	if (!validate(*a, *b))
 	{
-		while (i++ < m)
-			print_cmd("pb", a, b);
-		swap_sort(a, b);
-		merge(a, b);
+		while (i++ < size)
+		{
+			if (*((int *)(*a)->content) <= m && j++)
+				print_cmd("pb", a, b);
+			else
+				print_cmd("ra", a, b);
+		}
+		j = (j > (size / 2)) ? j : size - j;
+		swap_sort(a, b, j);
+		merge(a, b, size);
 	}
 }

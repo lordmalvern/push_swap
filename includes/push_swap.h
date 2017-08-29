@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:47:55 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/10 14:28:59 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/28 19:57:41 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@
 
 void	print_cmd(char *cmd, t_list **a, t_list **b);
 void	sort(t_list **a, t_list **b, int size);
+int		get_median(t_list **a, int size);
 #endif

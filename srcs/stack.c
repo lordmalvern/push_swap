@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/26 17:52:53 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/08/28 19:41:07 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	push(t_list **stack, void *elem, size_t size)
 
 t_list	*pop(t_list **stack)
 {
-	static t_list *out;
-	t_list *temp;
+	static t_list	*out;
+	t_list			*temp;
 
 	if (*stack == NULL)
 		return (NULL);
@@ -88,9 +88,12 @@ void	rotate(t_list **stack)
 	t_list *end;
 	t_list *curr;
 
-	end = pop(stack);
-	curr = *stack;
-	while (curr->next != NULL)
-		curr = curr->next;
-	curr->next = end;
+	if ((*stack)->next != NULL)
+	{
+		end = pop(stack);
+		curr = *stack;
+		while (curr->next != NULL)
+			curr = curr->next;
+		curr->next = end;
+	}
 }
