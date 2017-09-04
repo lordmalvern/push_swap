@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 13:34:42 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/06/15 15:32:41 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/09/01 11:38:54 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # define BUFF_SIZE 8
 # define MAX_FD 10240
+# define MIN(a, b) (a < b) ? a : b
+# define MAX(a, b) (a > b) ? a : b
 
 typedef struct		s_list
 {

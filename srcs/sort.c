@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 13:11:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/28 21:30:13 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/09/04 16:33:33 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void		sort(t_list **a, t_list **b, int size)
 	int i;
 	int j;
 
-	m = get_median(a, size);
+	m = get_median(a, 0, size);
 	i = 0;
 	j = 1;
 	if (*a == NULL || (*a)->next == NULL)
@@ -107,7 +107,7 @@ void		sort(t_list **a, t_list **b, int size)
 	{
 		while (i++ < size)
 		{
-			if (*((int *)(*a)->content) <= m && j++)
+			if (CUR(*a) <= m && j++)
 				print_cmd("pb", a, b);
 			else
 				print_cmd("ra", a, b);
