@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:30:17 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/28 21:29:50 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/02 14:23:18 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static int	is_valid(char *cmd)
 {
 	if (ft_strequ(cmd, "sa") || ft_strequ(cmd, "sb") || ft_strequ(cmd, "ss"))
 		return (1);
-	if (ft_strequ(cmd, "pa"))
-		return (1);
-	if (ft_strequ(cmd, "pb"))
+	if (ft_strequ(cmd, "pa") || ft_strequ(cmd, "pb"))
 		return (1);
 	if (ft_strequ(cmd, "ra") || ft_strequ(cmd, "rb") || ft_strequ(cmd, "rr"))
 		return (1);
@@ -58,21 +56,21 @@ void		parse_cmd(char *cmd, t_list **a, t_list **b, int debug)
 {
 	if (is_valid(cmd))
 	{
-		if (ft_strequ(cmd, "sa") || ft_strequ(cmd, "ss"))
+		if ((ft_strequ(cmd, "sa") || ft_strequ(cmd, "ss")) && *a)
 			bubble_up(a);
-		if (ft_strequ(cmd, "sb") || ft_strequ(cmd, "ss"))
+		if ((ft_strequ(cmd, "sb") || ft_strequ(cmd, "ss")) && *b)
 			bubble_up(b);
-		if (ft_strequ(cmd, "pa"))
+		if (ft_strequ(cmd, "pa") && *b)
 			swap(b, a);
-		if (ft_strequ(cmd, "pb"))
+		if (ft_strequ(cmd, "pb") && *a)
 			swap(a, b);
-		if (ft_strequ(cmd, "ra") || ft_strequ(cmd, "rr"))
+		if ((ft_strequ(cmd, "ra") || ft_strequ(cmd, "rr")) && *a)
 			rotate(a);
-		if (ft_strequ(cmd, "rb") || ft_strequ(cmd, "rr"))
+		if ((ft_strequ(cmd, "rb") || ft_strequ(cmd, "rr")) && *b)
 			rotate(b);
-		if (ft_strequ(cmd, "rra") || ft_strequ(cmd, "rrr"))
+		if ((ft_strequ(cmd, "rra") || ft_strequ(cmd, "rrr")) && *a)
 			rrotate(a);
-		if (ft_strequ(cmd, "rrb") || ft_strequ(cmd, "rrr"))
+		if ((ft_strequ(cmd, "rrb") || ft_strequ(cmd, "rrr")) && *b)
 			rrotate(b);
 	}
 	else

@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_median.c                                       :+:      :+:    :+:   */
+/*   roulette.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 19:51:52 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/09 13:45:58 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/09/26 16:47:30 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/09/28 21:08:38 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	get_median(t_list **a, int start, int size)
+int	roulette(t_gene *pool)
 {
-	int	med;
 	int i;
-	int j;
-	int *arr;
+	int sum;
+	int spin;
 
-	i = start;
-	arr = ft_memalloc(size * sizeof(int));
-	list_to_arr(a, &arr);
-	while (++i < size)
+	i = -1;
+	sum = 0;
+	while (++i < P_SIZE)
+		sum += pool[i].fitness;
+	spin = (ft_rand(sum) % sum) + 1;
+	i = -1;
+	while (++i < P_SIZE)
 	{
-		j = i;
-		while (j > 0 && arr[j - 1] > arr[j])
-		{
-			med = arr[j];
-			arr[j] = arr[j - 1];
-			arr[j - 1] = med;
-			j--;
-		}
+		spin -= pool[i].fitness;
+		if (spin <= 0)
+			return (i);
 	}
-	med = arr[(size - start) / 2];
-	free(arr);
-	return (med);
+	return (P_SIZE - 1);
 }

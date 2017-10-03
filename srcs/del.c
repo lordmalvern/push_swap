@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_median.c                                       :+:      :+:    :+:   */
+/*   del.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 19:51:52 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/09 13:45:58 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/09/26 15:38:21 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/09/26 15:38:55 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
-int	get_median(t_list **a, int start, int size)
+void	del(void *content, size_t size)
 {
-	int	med;
-	int i;
-	int j;
-	int *arr;
-
-	i = start;
-	arr = ft_memalloc(size * sizeof(int));
-	list_to_arr(a, &arr);
-	while (++i < size)
-	{
-		j = i;
-		while (j > 0 && arr[j - 1] > arr[j])
-		{
-			med = arr[j];
-			arr[j] = arr[j - 1];
-			arr[j - 1] = med;
-			j--;
-		}
-	}
-	med = arr[(size - start) / 2];
-	free(arr);
-	return (med);
+	if (content)
+		free(content);
+	size = 0;
 }

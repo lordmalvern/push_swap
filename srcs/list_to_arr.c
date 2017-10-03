@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_median.c                                       :+:      :+:    :+:   */
+/*   list_to_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 19:51:52 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/09 13:45:58 by bpuschel         ###   ########.fr       */
+/*   Created: 2017/09/24 14:59:52 by bpuschel          #+#    #+#             */
+/*   Updated: 2017/09/24 15:01:10 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	get_median(t_list **a, int start, int size)
+void	list_to_arr(t_list **a, int **b)
 {
-	int	med;
-	int i;
-	int j;
-	int *arr;
+	int		i;
+	t_list	*curr;
 
-	i = start;
-	arr = ft_memalloc(size * sizeof(int));
-	list_to_arr(a, &arr);
-	while (++i < size)
+	i = 0;
+	curr = *a;
+	while (curr)
 	{
-		j = i;
-		while (j > 0 && arr[j - 1] > arr[j])
-		{
-			med = arr[j];
-			arr[j] = arr[j - 1];
-			arr[j - 1] = med;
-			j--;
-		}
+		b[0][i] = CUR(curr);
+		curr = curr->next;
+		i++;
 	}
-	med = arr[(size - start) / 2];
-	free(arr);
-	return (med);
 }

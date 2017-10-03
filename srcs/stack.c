@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/28 19:41:07 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/09/28 13:05:00 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ void	rotate(t_list **stack)
 {
 	t_list *end;
 	t_list *curr;
-
-	if ((*stack)->next != NULL)
+	if (*stack && (*stack)->next)
 	{
 		end = pop(stack);
 		curr = *stack;
