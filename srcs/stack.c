@@ -6,34 +6,37 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/28 13:05:00 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/06 11:32:30 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/stack.h"
 
-void	push(t_list **stack, void *elem, size_t size)
+void	push(t_stack **stack, void *elem, size_t size)
 {
 	static t_list *to_add;
 
-	if (*stack == NULL)
-		*stack = ft_lstnew(elem, size);
+	if ((*stack)->stack == NULL)
+	{
+		(*stack)->stack = ft_lstnew(elem, size);
+		(*stack)->end = (*stack)->stack;
+	}
 	else
 	{
 		to_add = ft_lstnew(elem, size);
-		ft_lstadd(stack, to_add);
+		ft_lstadd(&((*stack)->stack), to_add);
 	}
 }
 
-t_list	*pop(t_list **stack)
+t_list	*pop(t_stack **stack)
 {
-	static t_list	*out;
-	t_list			*temp;
+	t_list	*out;
+	t_list	*temp;
 
 	if (*stack == NULL)
 		return (NULL);
-	temp = *stack;
-	*stack = temp->next;
+	temp = (*stack)->stack;
+	(*stack)->stack = temp->next;
 	out = ft_lstnew(temp->content, temp->content_size);
 	free(temp->content);
 	free(temp);
@@ -47,18 +50,18 @@ t_list	*pop(t_list **stack)
 ** if stack contains one or no elements.
 */
 
-void	bubble_up(t_list **stack)
+void	bubble_up(t_stack **stack)
 {
 	void	*c;
 	size_t	s;
 
-	if ((*stack) != NULL && (*stack)->next != NULL)
+	if ((*stack)->stack != NULL && (*stack)->stack->next != NULL)
 	{
-		s = (*stack)->content_size;
+		s = (*stack)->stack->content_size;
 		c = ft_memalloc(s);
-		ft_memcpy(c, (*stack)->next->content, s);
-		ft_memcpy((*stack)->next->content, (*stack)->content, s);
-		ft_memcpy((*stack)->content, c, s);
+		ft_memcpy(c, (*stack)->stack->next->content, s);
+		ft_memcpy((*stack)->stack->next->content, (*stack)->stack->content, s);
+		ft_memcpy((*stack)->stack->content, c, s);
 		free(c);
 	}
 }
@@ -70,29 +73,29 @@ void	bubble_up(t_list **stack)
 ** Does nothing if a is empty.
 */
 
-void	swap(t_list **a, t_list **b)
+void	swap(t_stack **a, t_stack **b)
 {
 	t_list *temp;
 
 	if (*a != NULL)
 	{
 		temp = pop(a);
+		(*a)->size -= 1;
 		push(b, temp->content, temp->content_size);
 		free(temp->content);
 		free(temp);
+		(*b)->size += 1;
 	}
 }
 
-void	rotate(t_list **stack)
+void	rotate(t_stack **stack)
 {
 	t_list *end;
-	t_list *curr;
-	if (*stack && (*stack)->next)
+	if ((*stack)->stack && (*stack)->stack->next)
 	{
 		end = pop(stack);
-		curr = *stack;
-		while (curr->next != NULL)
-			curr = curr->next;
-		curr->next = end;
+		end->next = NULL;
+		(*stack)->end->next = end;
+		(*stack)->end = (*stack)->end->next;
 	}
 }

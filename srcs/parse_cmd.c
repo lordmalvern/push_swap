@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:30:17 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/02 14:23:18 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/07 19:05:37 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 
 static void	debug_print(t_list *a, t_list *b)
 {
-	if (b == NULL)
+	if (b == NULL || a == NULL)
 	{
 		while (a != NULL)
 		{
-			ft_printf("%-15d\n", *((int *)a->content));
+			ft_printf("%-14d\n", *((int *)a->content));
 			a = a->next;
 		}
-		ft_printf("---------------\n");
-	}
-	else if (a == NULL)
-	{
 		while (b != NULL)
 		{
-			ft_printf("%15d\n", *((int *)b->content));
+			ft_printf("%28d\n", *((int *)b->content));
 			b = b->next;
 		}
 		ft_printf("---------------\n");
 	}
 	else
 	{
-		ft_printf("%-15d%d\n", *((int *)a->content), *((int *)b->content));
+		ft_printf("%-14d%14d\n", *((int *)a->content), *((int *)b->content));
 		debug_print(a->next, b->next);
 	}
 }
@@ -52,7 +48,7 @@ static int	is_valid(char *cmd)
 	return (0);
 }
 
-void		parse_cmd(char *cmd, t_list **a, t_list **b, int debug)
+void		parse_cmd(char *cmd, t_stack **a, t_stack **b, int debug)
 {
 	if (is_valid(cmd))
 	{
@@ -76,5 +72,5 @@ void		parse_cmd(char *cmd, t_list **a, t_list **b, int debug)
 	else
 		ft_printf("Error\n");
 	if (debug)
-		debug_print(*a, *b);
+		debug_print((*a)->stack, (*b)->stack);
 }

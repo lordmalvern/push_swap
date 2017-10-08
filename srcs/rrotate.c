@@ -6,26 +6,27 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 17:28:25 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/27 22:20:34 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/07 23:35:38 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/stack.h"
 
-void	rrotate(t_list **stack)
+void	rrotate(t_stack **stack)
 {
 	t_list *curr;
-	
-	curr = *stack;
-	if (curr)
+
+	curr = (*stack)->stack;
+	if ((*stack)->stack && (*stack)->end)
 	{
-		while (curr->next && curr->next->next)
+		while (curr && curr->next != (*stack)->end)
 			curr = curr->next;
-		if (curr->next)
+		if ((*stack)->end && curr)
 		{
-			push(stack, curr->next->content, curr->next->content_size);
-			free(curr->next);
+			push(stack, (*stack)->end->content, (*stack)->end->content_size);
+			free((*stack)->end);
 			curr->next = NULL;
+			(*stack)->end = curr;
 		}
 	}
 }

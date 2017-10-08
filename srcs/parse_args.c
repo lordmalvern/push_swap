@@ -6,13 +6,13 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:31:59 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/21 18:42:19 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/05 01:28:45 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-void		parse_args(t_list **a, char **argv, int debug, int i)
+void		parse_args(t_stack **a, char **argv, int debug, int i)
 {
 	int		n;
 	int		j;

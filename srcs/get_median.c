@@ -6,13 +6,13 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 19:51:52 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/09/09 13:45:58 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/05 01:45:56 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	get_median(t_list **a, int start, int size)
+int	get_median(t_stack **a, int start, int size)
 {
 	int	med;
 	int i;

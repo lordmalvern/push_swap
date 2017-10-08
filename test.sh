@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/08 22:09:41 by bpuschel          #+#    #+#              #
-#    Updated: 2017/09/24 13:01:19 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/10/08 01:01:01 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #!/bin/sh
@@ -118,15 +118,62 @@ do
 	then MIN="$NUM3"
 	fi;
 	if [ "$NUM3" -gt "700" ]
-	then echo "Exceeded max instructions on list: ${ARG3}\n"
+	then echo "${RED}Exceeded max instructions on list: ${ARG3}${NC}\n"
 		OVER=$[$OVER+1]
 	fi;
 	echo "Number of instructions: ${NUM3}\n"
 	if [ "$RES3" == "KO" ]
-	then echo "KO on list: ${ARG3}\n"
+	then echo "${RED}KO on list: ${ARG3}${NC}\n"
 	fi;
 	if [ "$RES3" == "Error" ]
-	then echo "Error on list ${ARG3}\n"
+	then echo "${RED}Error on list ${ARG3}${NC}\n"
+	fi;
+	if [ "$RES3" == "OK" ];
+	then OK=$[$OK+1]
+	else KO=$[$KO+1]
+	fi;
+	i=$[$i+1]
+done
+echo "Number of lists exceeding max: ${OVER}\nMax instructions done: ${MAX}\nMin instructions done: ${MIN}\nTotal OKs: ${OK}\nTotal KOs: ${KO}\n"
+echo "500 Random Numbers 100 Times:\n"
+i="0"
+MAX="0"
+MIN="100000000000"
+OK="0"
+KO="0"
+OVER="0"
+while [ $i -lt 100 ]
+do
+	j="0"
+	declare -a ARR2
+	while [ $j -lt 500 ]
+	do
+		ARR2[$j]=$RANDOM
+		ARR2=(`echo "${ARR2[*]}" | tr ' ' '\n' | awk '!a[$0]++' | tr '\n' ' '`);
+		if [ "$j" -gt "$[${#ARR2[*]}- 1]" ]
+		then j=$[${#ARR2[*]}- 1]
+		fi;
+		j=$[$j+1]
+	done;
+	ARG3=`echo ${ARR2[*]}`
+	NUM3=`./push_swap $ARG3 | wc -l`
+	RES3=`./push_swap $ARG3 | ./checker $ARG3`
+	if [ "$NUM3" -gt "$MAX" ];
+	then MAX="$NUM3"
+	fi;
+	if [ "$NUM3" -lt "$MIN" ]
+	then MIN="$NUM3"
+	fi;
+	if [ "$NUM3" -gt "5300" ]
+	then echo "${RED}Exceeded max instructions on list: ${ARG3}${NC}\n"
+		OVER=$[$OVER+1]
+	fi;
+	echo "Number of instructions: ${NUM3}\n"
+	if [ "$RES3" == "KO" ]
+	then echo "${RED}KO on list: ${ARG3}${NC}\n"
+	fi;
+	if [ "$RES3" == "Error" ]
+	then echo "${RED}Error on list ${ARG3}${NC}\n"
 	fi;
 	if [ "$RES3" == "OK" ];
 	then OK=$[$OK+1]

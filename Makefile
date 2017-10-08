@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/24 15:55:28 by bpuschel          #+#    #+#              #
-#    Updated: 2017/09/26 19:53:11 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/10/07 01:06:33 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ STACK_OBJ = $(STACK_FILES:.c=.o)
 CHECKER_FILES = parse_cmd.c validate.c checker.c parse_args.c del.c
 CHECKER_OBJ = $(CHECKER_FILES:.c=.o)
 PUSH_FILES = validate.c parse_cmd.c print_cmd.c push_swap.c sort.c \
-get_median.c alt_sort.c parse_args.c list_to_arr.c ft_rand.c evolve.c del.c \
-breed_and_mutate.c roulette.c
+get_median.c alt_sort.c parse_args.c list_to_arr.c del.c util.c alt_rotate.c
 PUSH_OBJ = $(PUSH_FILES:.c=.o)
 GCC = gcc -Wall -Werror -Wextra -I $(INCLUDE) -Llibft/ -lftprintf -g -o
 .PHONY: all clean fclean re
