@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 18:46:06 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/06 11:32:30 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 01:38:23 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	swap(t_stack **a, t_stack **b)
 void	rotate(t_stack **stack)
 {
 	t_list *end;
+
 	if ((*stack)->stack && (*stack)->stack->next)
 	{
 		end = pop(stack);

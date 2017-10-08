@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 22:27:43 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/08 01:08:20 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 01:39:55 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static int		insertion(t_stack **s, t_list *c, int j, int l)
 	if ((CUR(c) > CUR((*s)->stack) && !l) || (CUR(c) < CUR((*s)->stack) && l))
 		while (c && tmp && CUR(c) > CUR(tmp) && ++j < (*s)->size)
 			tmp = tmp->next;
-	else if ((CUR(c) < CUR((*s)->stack) && !l) 
+	else if ((CUR(c) < CUR((*s)->stack) && !l)
 			|| (CUR(c) > CUR((*s)->stack) && l))
 	{
 		while (c && tmp && CUR(c) < CUR(tmp) && ++j <= (*s)->size)
 		{
 			tmp = tmp->next;
-			if (c && tmp && CUR(tmp) == (*s)->min && CUR(c) < (*s)->max 
+			if (c && tmp && CUR(tmp) == (*s)->min && CUR(c) < (*s)->max
 					&& ++j < (*s)->size)
 			{
 				tmp = tmp->next;
@@ -101,7 +101,7 @@ static void		shortest_path(t_util *util)
 {
 	int	x;
 	int	y;
-	
+
 	x = MAX(util->rra, util->rrb);
 	y = MAX(util->ra, util->rb);
 	util->len = MIN(x, y);

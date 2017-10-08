@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/08 01:24:17 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 01:43:25 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_order(t_stack *a)
 	return (1);
 }
 
-static void find_minimax(t_list *a, int *min, int *max)
+static void	find_minimax(t_list *a, int *min, int *max)
 {
 	t_list *curr;
 
@@ -104,18 +104,17 @@ static void	stack_sort(t_stack **a, t_stack **b)
 
 void		alt_sort(t_stack **a, t_stack **b)
 {
-	int i;
-	t_list *curr;
+	int		i;
+	t_list	*curr;
 
-	if (CUR((*a)->stack) > NXT((*a)->stack) 
-			&& NNXT((*a)->stack) > NNXT((*a)->stack->next))
+	if (DCBA((*a)->stack))
 	{
 		print_cmd("pb", a, b, 2);
 		print_cmd("ss", a, b, 1);
 	}
 	else if (CUR((*a)->stack) > NXT((*a)->stack))
 		print_cmd("sa", a, b, 1);
-	while (((*b)->size == 0 || CUR((*a)->stack) > CUR((*b)->stack)) 
+	while (((*b)->size == 0 || CUR((*a)->stack) > CUR((*b)->stack))
 			&& (*a)->size > 2)
 		print_cmd("pb", a, b, 1);
 	find_minimax((*a)->stack, &((*a)->min), &((*a)->max));
