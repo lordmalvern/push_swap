@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 19:32:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/09 09:54:58 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/09 11:08:02 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,19 @@ int			main(int argc, char **argv)
 	int		i;
 	int		debug;
 
+	i = -1;
 	a = ft_memalloc(sizeof(t_stack));
 	b = ft_memalloc(sizeof(t_stack));
 	a->stack = NULL;
 	b->stack = NULL;
 	debug = 0;
-	i = argc;
 	if (argc > 1)
 	{
 		if (ft_strequ(argv[1], "-v"))
 			debug = 1;
-		parse_args(&a, argv, debug, i);
-		parse(&a, &b, debug);
+		i = parse_args(&a, argv, debug, argc);
+		if (i != -1)
+			parse(&a, &b, debug);
 	}
-	ft_lstdel(&(a->stack), del);
-	ft_lstdel(&(b->stack), del);
-	free(a->stack);
-	free(b->stack);
-	free(a);
-	free(b);
-	return (0);
+	clean_stacks(&a, &b, i);
 }

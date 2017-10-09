@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 22:54:12 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/09 09:46:11 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/09 11:06:29 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int			main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
+	int		i;
 
+	i = -1;
 	a = (t_stack *)ft_memalloc(sizeof(t_stack));
 	a->stack = NULL;
 	a->size = argc - 1;
@@ -25,17 +27,11 @@ int			main(int argc, char **argv)
 	b->size = 0;
 	if (argc > 1)
 	{
-		parse_args(&a, argv, 0, argc);
-		if (argc - 1 <= 5 && !validate(a->stack, b->stack))
+		i = parse_args(&a, argv, 0, argc);
+		if (i != -1 && argc - 1 <= 5 && !validate(a->stack, b->stack))
 			sort(&a, &b, argc - 1);
-		else if (!validate(a->stack, b->stack))
+		else if (i != -1 && !validate(a->stack, b->stack))
 			alt_sort(&a, &b);
 	}
-	ft_lstdel(&a->stack, del);
-	ft_lstdel(&b->stack, del);
-	free(a->stack);
-	free(b->stack);
-	free(a);
-	free(b);
-	exit(0);
+	clean_stacks(&a, &b, i);
 }

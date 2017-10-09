@@ -6,13 +6,13 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:31:59 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/05 01:28:45 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/09 11:10:18 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-void		parse_args(t_stack **a, char **argv, int debug, int i)
+int		parse_args(t_stack **a, char **argv, int debug, int i)
 {
 	int		n;
 	int		j;
@@ -32,8 +32,20 @@ void		parse_args(t_stack **a, char **argv, int debug, int i)
 		{
 			n = ft_atoi(argv[i]);
 			if ((!ft_isint(argv[i]) || !chk_dup(*a, n)) && ft_printf("Error\n"))
-				exit(-1);
+				return (-1);
 			push(a, &n, sizeof(int));
 		}
 	}
+	return (0);
+}
+
+void	clean_stacks(t_stack **a, t_stack **b, int i)
+{
+	ft_lstdel(&(*a)->stack, del);
+	ft_lstdel(&(*b)->stack, del);
+	free((*a)->stack);
+	free((*b)->stack);
+	free(*a);
+	free(*b);
+	exit(i);
 }
