@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:17:19 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/03/16 19:31:13 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/09 10:17:06 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	read_fd(int fd, char **buf, int *i)
 	ft_bzero(buf[0], (BUFF_SIZE + 1) * sizeof(char));
 	*i = -1;
 	bytes = read(fd, buf[0], BUFF_SIZE);
-	if (bytes < 0)
+	if (bytes <= 0)
 		ft_strdel(buf);
 	return (bytes);
 }
@@ -67,7 +67,7 @@ int			get_next_line(const int fd, char **line)
 		line[0] = (b > 0) ? ft_strextend(line, BUFF_SIZE) : line[0];
 	}
 	line[0][j] = '\0';
-	if (i == BUFF_SIZE - 1)
+	if (i >= BUFF_SIZE - 1)
 		ft_strdel(&d[f]);
 	return ((b < 0) ? b : 1);
 }
