@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 22:27:43 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/08 01:39:55 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 15:50:54 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		insertion(t_stack **s, t_list *c, int j, int l)
 	else if ((CUR(c) < CUR((*s)->stack) && !l)
 			|| (CUR(c) > CUR((*s)->stack) && l))
 	{
-		while (c && tmp && CUR(c) < CUR(tmp) && ++j <= (*s)->size)
+		while (c && tmp && CUR(c) < CUR(tmp) && ++j < (*s)->size)
 		{
 			tmp = tmp->next;
 			if (c && tmp && CUR(tmp) == (*s)->min && CUR(c) < (*s)->max
@@ -62,7 +62,7 @@ static int		get_index_b(t_stack **a, t_stack **b, int i)
 			return (0);
 		j = 0;
 		curr = (*b)->stack;
-		while (curr && CUR(curr) != (*b)->min && ++j < (*b)->size)
+		while (curr && CUR(curr) > (*b)->min && ++j < (*b)->size)
 			curr = curr->next;
 		return (j);
 	}
@@ -128,7 +128,7 @@ t_util			util_init(t_stack **a, t_stack **b, int i, int a_or_b)
 		out.a_i = i;
 		out.b_i = get_index_b(a, b, i);
 		out.rb = out.b_i;
-		out.rrb = (*b)->size - out.b_i;
+		out.rrb = (*b)->size - out.rb;
 	}
 	else
 	{
@@ -137,7 +137,7 @@ t_util			util_init(t_stack **a, t_stack **b, int i, int a_or_b)
 		out.b_i = i;
 		out.a_i = get_index_a(a, b, i);
 		out.ra = out.a_i;
-		out.rra = (*a)->size - out.a_i;
+		out.rra = (*a)->size - out.ra;
 	}
 	shortest_path(&out);
 	return (out);

@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 21:53:49 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/08/26 17:43:08 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 15:54:40 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	static t_list	*head;
+	t_list	*head;
 
 	head = (t_list *)ft_memalloc(sizeof(t_list));
 	if (head == NULL)

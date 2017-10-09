@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:35 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/08 01:43:25 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 14:38:52 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ void		alt_sort(t_stack **a, t_stack **b)
 			curr = curr->next;
 	while (i >= (*a)->size / 2 && CUR((*a)->stack) != (*a)->min)
 		print_cmd("rra", a, b, 1);
-	while (i > 0 && i < (*a)->size / 2 && CUR((*a)->stack) != (*a)->min)
+	while (i < (*a)->size / 2 && CUR((*a)->stack) != (*a)->min)
 		print_cmd("ra", a, b, 1);
 }
