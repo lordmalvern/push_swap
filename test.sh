@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/08 22:09:41 by bpuschel          #+#    #+#              #
-#    Updated: 2017/10/08 01:01:01 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/10/08 22:43:52 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #!/bin/sh
@@ -48,6 +48,7 @@ MIN="100000000000"
 OK="0"
 KO="0"
 OVER="0"
+SUM="0"
 while [ $i -lt 100 ]
 do
 	j="0"
@@ -74,7 +75,10 @@ do
 	then echo "Exceeded max instructions on list: ${ARG3}\n"
 		OVER=$[$OVER+1]
 	fi;
-	echo "Number of instructions: ${NUM3}\n"
+	if [ "$NUM3" -gt "12" ];
+	then echo "Number of instructions: ${RED}${NUM3}${NC}\n";
+	else echo "Number of instructions: ${GREEN}${NUM3}${NC}\n";
+	fi;
 	if [ "$RES3" == "KO" ]
 	then echo "KO on list: ${ARG3}\n"
 	fi;
@@ -85,8 +89,11 @@ do
 	then OK=$[$OK+1]
 	else KO=$[$KO+1]
 	fi;
+	SUM=$[$SUM+$NUM3]
 	i=$[$i+1]
 done
+AVG=$[$SUM/100]
+echo "Average number of instructions: ${AVG}\n"
 echo "Number of lists exceeding max: ${OVER}\nMax instructions done: ${MAX}\nMin instructions: ${MIN}\nTotal OKs: ${OK}\nTotal KOs: ${KO}\n"
 echo "100 Random Numbers 100 Times:\n"
 i="0"
@@ -95,6 +102,7 @@ MIN="100000000000"
 OK="0"
 KO="0"
 OVER="0"
+SUM="0"
 while [ $i -lt 100 ]
 do
 	j="0"
@@ -121,7 +129,10 @@ do
 	then echo "${RED}Exceeded max instructions on list: ${ARG3}${NC}\n"
 		OVER=$[$OVER+1]
 	fi;
-	echo "Number of instructions: ${NUM3}\n"
+	if [ "$NUM3" -gt "700" ];
+	then echo "Number of instructions: ${RED}${NUM3}${NC}\n";
+	else echo "Number of instructions: ${GREEN}${NUM3}${NC}\n";
+	fi;
 	if [ "$RES3" == "KO" ]
 	then echo "${RED}KO on list: ${ARG3}${NC}\n"
 	fi;
@@ -132,8 +143,11 @@ do
 	then OK=$[$OK+1]
 	else KO=$[$KO+1]
 	fi;
+	SUM=$[$SUM+$NUM3]
 	i=$[$i+1]
 done
+AVG=$[$SUM/100]
+echo "Average number of instructions: ${AVG}\n"
 echo "Number of lists exceeding max: ${OVER}\nMax instructions done: ${MAX}\nMin instructions done: ${MIN}\nTotal OKs: ${OK}\nTotal KOs: ${KO}\n"
 echo "500 Random Numbers 100 Times:\n"
 i="0"
@@ -142,6 +156,7 @@ MIN="100000000000"
 OK="0"
 KO="0"
 OVER="0"
+SUM="0"
 while [ $i -lt 100 ]
 do
 	j="0"
@@ -168,7 +183,10 @@ do
 	then echo "${RED}Exceeded max instructions on list: ${ARG3}${NC}\n"
 		OVER=$[$OVER+1]
 	fi;
-	echo "Number of instructions: ${NUM3}\n"
+	if [ "$NUM3" -gt "5300" ];
+	then echo "Number of instructions: ${RED}${NUM3}${NC}\n";
+	else echo "Number of instructions: ${GREEN}${NUM3}${NC}\n";
+	fi;
 	if [ "$RES3" == "KO" ]
 	then echo "${RED}KO on list: ${ARG3}${NC}\n"
 	fi;
@@ -179,6 +197,10 @@ do
 	then OK=$[$OK+1]
 	else KO=$[$KO+1]
 	fi;
+	SUM=$[$SUM+$NUM3]
 	i=$[$i+1]
 done
+AVG=$[$SUM/100]
+echo "Average number of instructions: ${AVG}\n"
 echo "Number of lists exceeding max: ${OVER}\nMax instructions done: ${MAX}\nMin instructions done: ${MIN}\nTotal OKs: ${OK}\nTotal KOs: ${KO}\n"
+echo "${GREEN}-----TESTS COMPLETE-----${NC}\n"

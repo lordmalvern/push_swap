@@ -6,7 +6,7 @@
 /*   By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 22:54:12 by bpuschel          #+#    #+#             */
-/*   Updated: 2017/10/08 18:30:44 by bpuschel         ###   ########.fr       */
+/*   Updated: 2017/10/08 19:03:12 by bpuschel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int			main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	parse_args(&a, argv, 0, argc);
-	if (argc - 1 <= 5)
+	if (argc - 1 <= 5 && !validate(a->stack, b->stack))
 		sort(&a, &b, argc - 1);
-	else
+	else if (!validate(a->stack, b->stack))
 		alt_sort(&a, &b);
 	ft_lstdel(&a->stack, del);
 	ft_lstdel(&b->stack, del);
