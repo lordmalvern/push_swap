@@ -6,7 +6,7 @@
 #    By: bpuschel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/24 15:55:28 by bpuschel          #+#    #+#              #
-#    Updated: 2017/10/09 11:30:08 by bpuschel         ###   ########.fr        #
+#    Updated: 2017/10/09 13:21:19 by bpuschel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ CHECKER_OBJ = $(CHECKER_FILES:.c=.o)
 PUSH_FILES = validate.c parse_cmd.c print_cmd.c push_swap.c sort.c \
 get_median.c alt_sort.c parse_args.c list_to_arr.c del.c util.c alt_rotate.c
 PUSH_OBJ = $(PUSH_FILES:.c=.o)
-GCC = gcc -Wall -Werror -Wextra -I $(INCLUDE) -Llibft/ -lftprintf -o
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -I $(INCLUDE) -g -o
+LDFLAGS = -Llibft/ 
+LDLIBS = -lftprintf
 .PHONY: all clean fclean re
 
 all: libftprintf-all $(NAMEC) $(NAMEP)
@@ -36,10 +39,12 @@ fclean: libftprintf-fclean clean
 re: fclean all
 
 $(NAMEC):
-	$(GCC) $(NAMEC) $(addprefix $(SRC), $(STACK_FILES) $(CHECKER_FILES))
+	$(CC) $(CFLAGS) $@ $(LDFLAGS) \
+		$(LDLIBS) $(addprefix $(SRC), $(STACK_FILES) $(CHECKER_FILES))
 
 $(NAMEP):
-	$(GCC) $(NAMEP) $(addprefix $(SRC), $(STACK_FILES) $(PUSH_FILES))
+	$(CC) $(CFLAGS) $@ $(LDFLAGS) \
+		$(LDLIBS) $(addprefix $(SRC), $(STACK_FILES) $(PUSH_FILES))
 
 libftprintf-all:
 	cd libft && $(MAKE)
